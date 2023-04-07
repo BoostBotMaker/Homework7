@@ -156,8 +156,9 @@ def position_birth_search(position, age, cur, conn):
 
     cur.execute(""" SELECT name, position, birthyear
                     FROM Players JOIN Positions
-                    WHERE positions = (?) AND birthyear < date
-                """, (position,), (date))
+                    ON Players.position_id = Positions.id
+                    WHERE position = (?) AND birthyear > (?)
+                """, (position, date))
     players = cur.fetchall()
     for player in players:
         player_list.append(player)
