@@ -97,11 +97,12 @@ def nationality_search(countries, cur, conn):
     for country in countries:
         cur.execute(""" SELECT name, position_id, nationality 
                         FROM Players WHERE nationality = (?)
-                    """, (country))
-        player_tup = cur.fetchall()
-        player_list.append(player_tup)
+                    """, (country,))
+        player_nat = cur.fetchall()
+        for player in player_nat:
+            player_list.append(player)
     return player_list
-        
+
 
 ## [TASK 3]: 10 points
 # finish the function birthyear_nationality_search
